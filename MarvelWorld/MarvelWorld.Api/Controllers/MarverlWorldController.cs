@@ -21,9 +21,24 @@ namespace MarvelWorld.Api.Controllers
 
         // GET: api/MarverlWorld
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<object> Get()
         {
-            return new string[] { "Spider Man", "X-Men" };
+            return new object[] {
+                new {
+                        name = "Spider Man",
+                        thumbnail = new {
+                                            path = "sd",
+                                            extension = "dfsd"
+                                        }
+                   },
+                new {
+                        name = "Spider Man 22",
+                        thumbnail = new {
+                                            path = "sd2",
+                                            extension = "dfsd2"
+                                        }
+                   }
+            };
         }
 
         // GET: api/MarverlWorld/5
