@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment-backend
+  labels:
+    app: my-backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-backend
+  template:
+    metadata:
+      labels:
+        app: my-backend
+    spec:
+      containers:
+      - name: my-backend
+        image: acrmarvel.azurecr.io/marveldocker_marvelbackend:v1
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            memory: "128Mi" #128 MB
+            cpu: "200m" #200 millicpu (.2 cpu or 20% of the cpu)
+      imagePullSecrets:
+        - name: acr-secret
+
+      
+# kubectl create –f nginx.pod.yml --save-config
+# kubectl describe pod [pod-name]
+# kubectl apply –f nginx.pod.yml
+# kubectl exec [pod-name] -it sh
+# kubectl edit -f nginx.pod.yml
+# Kubectl delete –f nginx.pod.yml
+
+# To exec into container use:
+# kubectl exec pod-name -it sh
