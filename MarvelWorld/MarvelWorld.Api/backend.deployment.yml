@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-deployment-backend
+  name: my-backend
   labels:
     app: my-backend
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: my-backend
@@ -18,13 +18,14 @@ spec:
       - name: my-backend
         image: acrmarvel.azurecr.io/marveldocker_marvelbackend:v1
         ports:
-        - containerPort: 80
+          - name: http
+            containerPort: 80
         resources:
           limits:
             memory: "128Mi" #128 MB
             cpu: "200m" #200 millicpu (.2 cpu or 20% of the cpu)
-      imagePullSecrets:
-        - name: acr-secret
+      # imagePullSecrets:
+        # - name: acr-secret
 
       
 # kubectl create –f nginx.pod.yml --save-config
